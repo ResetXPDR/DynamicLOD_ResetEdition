@@ -5,7 +5,7 @@ Based on muumimorko's idea and code in MSFS_AdaptiveLOD, as further developed by
 Now fully compatible with MSFS 2020 and 2024 in the one app, this app builds upon the functionality provided in DynamicLOD, which aims to improve MSFS performance and smoothness by dynamically changing the TLOD and OLOD based on the current AGL, and provides additional features such as:<br/>
 - Automatically detects and displays the MSFS version in use and keeps separate settings for each MSFS version and a single log file for both.
 - Remembers which MSFS version you last used the app with and will start up next time with the settings for that MSFS version.
-- Simultaneous PC, FG (native nVidia, FG mod and Lossless Scaling) and VR mode compatibility including correct FG FPS display and separate FPS targets for each mode,<br/>
+- Simultaneous PC, FG (native nVidia, MFG, FG mod or Lossless Scaling), and VR mode compatibility, including correct FG FPS display, and separate FPS targets for each mode,<br/>
 - Optional LOD updates in cruise,<br/> 
 - Optional predictive incremental steps between LOD changes to improve smoothness,<br/>
 - Optional cloud quality decrease with FPS Adaption,<br/>
@@ -39,11 +39,18 @@ How does this app work for Frame Generation (FG) users?
 - To see correct MSFS FG FPS, use the app's "On Top" option to overlay this app over MSFS and give MSFS the focus.
 - If MSFS FG is being incorrectly reported as enabled by the app, the likely reason is that either the FG mod had been installed and removed or you have disabled Hardware Accelerated Graphics Scheduling under Windows settings and the now the now greyed out MSFS FG setting may show that it is off but it is still set to on internally to MSFS. To fix, change the DLSSG line in your UserCfg.opt file to be DLSSG 0.
 - Lossless Scaling (LS) FG, including the scaling multiplier used, is also detected and the correct LSFG multiplied FPS is displayed.
+  - Make sure your LSFG app is updated to the latest version that supports LSFG 3.0 (2.13.2 or later).
   - The app will first try to use an LS profile with the specific name MSFS2020 or MSFS2024, depending on which MSFS version is currently in use, to obtain these settings.
   - If such an MSFS2020 or MSFS2024 profile does not exist then the settings in the Default profile will be used.
-  - If you are using LSFG 1.1 in LS and the app is not showing a 2X multiplier, temporarily select LSFG 2.3 in LS and select the 2X multiplier, switch back to LSFG 1.1 then press the app's Redetect button.
-  - If you make changes to your LS settings after starting a flight, press app's Reset button so that the app can redetect them correctly.
+  - When adaptive frame generation is detected, a base FPS will be used for the target FPS because the frame generation multiplier is variable and is not currently detectable.
+  - If you make changes to your LS settings after starting a flight, press AutoFPS's Reset button so that AutoFPS can redetect them correctly.
+- Multi Frame Generation, available only for users with 5000 series nVidia GPUs, is unable to be auto detected by the app at this time due to the privileged access need to read this setting.
+  - In the interim, a manual MFG multiplier and target MFG FPS selection will be presented on the UI when a 5000 series nVidia GPU is detected.
+  - Match the app's MFG multiplier with what you have set for MFG with MSFS in nVidia settings.
+  - Set to MFG Off if not using MFG or using an alternative FG method.
+  - Feature can be removed by the user setting MfgModeMultEnabled to false in MSFS_AutoFPS.config in the app root directory.
 - Detection of FG is normally only performed upon starting a flight. If FG is enabled or LS is started after this detection is normally performed, press the Reset button for it to be detected.
+- Only one type of FG can be active at a time for the app to show FPS correctly. In particular, using native nVidia or the FG mod AND LSFG will cause incorrect FPS calculations in the app because they function differently when MSFS loses focus. Choose one or the other if you want to use them with this app.
 
 This utility can be installed concurrent with any DynamicLOD variant. You just shouldn't run them at the same time, as they would both be fighting each other with MSFS settings. This app can detect whether itself, a previous DynamicLOD variant, MSFS2020_AutoFPS, MSFS_AutoFPS, MSFS2024_AutoFPS or Smoothflight is running and will quit if it encounters one.</br>
 
@@ -71,8 +78,11 @@ Basically: Just run the Installer.<br/>
 
 Some Notes:
 - DynamicLOD_ResetEdition has to be stopped before installing.
-- If the MobiFlight Module is not installed or outdated, MSFS also has to be stopped.
-- If you have duplicate MobiFlight Modules installed, in either your official or community folders, the utility may display 0 value Sim Values and otherwise not function. Remove the duplicate versions, rerun the utility installer and it should now work.
+- Mobiflight Module:
+  - If the installer can't locate your Community folder to install this module, perhaps because of a Custom MSFS install location, download the latest module version from [here](https://github.com/MobiFlight/MobiFlight-WASM-Module/releases) and manually extract to your Community folder.
+  - If the MobiFlight Module is not installed or outdated, MSFS also has to be stopped.
+  - If you have duplicate MobiFlight Modules installed, in either your official or community folders, the app may display 0 value Sim Values and otherwise not function. Remove the duplicate versions, rerun the app installer and it should now work.
+  - If the installer fails when checking/updating Mobiflight, despite the latest version being correctly installed in your MSFS Community folder, create a shortcut for the installer, add the command line option "-bypassmobiflight" to the target text box, then run the shortcut to be able to bypass this installation step.
 - Do not run the Installer as Admin!
 - If you wish to retain your settings for an update version, do NOT uninstall first, as that deletes all app files, including the config file. Just run the installer, select update and your settings will be retained.
 - The clean install option will recreate new configuration files without having to remove the app first.
@@ -86,6 +96,10 @@ Some Notes:
 - If after installing and running the app your simconnect always stays red:
   - Try downloading and installing a Microsoft official version of “Microsoft Visual C++ 2015 - 2022 Redistributable”, which may be missing from your Windows installation.
   - If still not resolved and the error code in your DynamicLOD_ResetEdition log file is Exception 31, you most likely have a corrupt MSFS installation so you can choose to either not run this app or to reinstall MSFS completely. 
+- If you get an "Unable to attach MSFS - app disabled." message, the most likely cause is that MSFS and this app are running at different permission privilege levels and/or your anti-virus/malware app is blocking this app. To resolve, try the following:
+  - Check that MSFS is not running as administrator.
+  - Set an exclusion for this app in your anti-virus/malware app.
+  - If all else fails, try running this app as administrator.
 - If you get an "MSFS compatibility test failed - app disabled." message there are numerous possible causes:
   - You have started MSFS, made changes to MSFS settings and then started this app. To rectify:
     - First, try exiting this app, go to the MSFS settings menu, toggle any simple setting eg. vsync, save changes then restart this app.
@@ -102,6 +116,17 @@ Some Notes:
 ## Usage / Configuration
 
 - General
+  - Update Management
+    - **Auto Updates** (default) will auto-install updates.
+      - Mandatory updates will auto install regardless of user settings.
+      - Optional updates will seek user confirmation and switch to **Show Updates** if declined.
+      - Installer runs automatically, showing Release Notes in Notepad and auto-starting the new version.
+    - **Show Updates** displays available updates and download links.
+    - **Mandatory Updates Only** displays and installs only mandatory updates.
+    - **+ Test** opts users into test version updates.
+      - Test version users will have **+ Test** force enabled and greyed out.
+      - **Mandatory Updates Only** will be unavailable until the app updates to a release version.
+    - App startup sequence ensures update check is completed before connecting to MSFS.
   - Starting manually: anytime, but preferably before MSFS or in the Main Menu. The utility will stop itself when MSFS closes.  
   - Closing the Window does not close the utility, use the Context Menu of the SysTray Icon.
   - Clicking on the SysTray Icon opens the Window (again).
