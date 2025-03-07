@@ -14,7 +14,7 @@ Now fully compatible with MSFS 2020 and 2024 in the one app, this app builds upo
 - Automatic FPS settling timer on MSFS graphics mode and focus changes to allow FPS to stabilise before being acted upon,<br/>
 - Auto future MSFS version compatibility, provided MSFS memory changes are like in previous updates,<br/>
 - Update prompt if newer utility version found on start-up,<br/>
-- Custom profile naming, but only through editing of the config file at this time,<br/> 
+- Custom profile naming,<br/> 
 - Auto disabling of Dynamic Settings in MSFS 2024 while this app is active, to prevent settings contention,
 - Auto restoration of original settings changed by the utility,<br/>
 - Enhanced saving and restoration of MSFS settings by the app to better withstand MSFS CTDs,<br/>
@@ -121,7 +121,7 @@ Some Notes:
   - Red values mean FPS Adaption is active, orange means LOD stepping is active, black means steady state, n/a means not available right now.
 - General
   - You can have (exactly) six different Sets/Profiles for the AGL/LOD Pairs to switch between (manually but dynamically).
-  - If you wish to have custom profile names, you will need to manually edit the config file for these items after running the new app version at least once, eg. &lt;add key="profileName1" value="IFR" /&gt;.
+  - Profile list names can be edited in the app by double clicking on the profile combo box to toggle edit-ability, with non-editable being the initial state on startup. Press Enter, press Tab or click on another control on the app UI for the changed text to be accepted.
   - Cruise LOD Updates, when checked, will continue to update LOD values based on AGL in the cruise phase, which is useful for VFR flights over undulating terrain and has an otherwise negligible impact on high level or IFR flights so it is recommended to enable this.
   - LOD Step Max, when checked, allows the utility to slow the rate of change in LOD per second, with increase and decrease being individually settable, to smooth out LOD table changes. This allows you to have large steps in your LOD tables without experiencing abrupt changes like having it disabled would do, hence it is recommended to turn it on and start out with the default steps of 5.
   - Redetect button - Redetects PC/FG/LSFG/VR graphics mode if changed by the user after commencing a flight, now necessary because the app no longer needlessly polls repetitively for graphics mode changes.
