@@ -146,8 +146,10 @@ Some Notes:
   - Will not show valid values unless all three connections are green.
   - Red values mean FPS Adaption is active, orange means LOD stepping is active, black means steady state, n/a means not available right now.
 - General
-  - You can have (exactly) six different Sets/Profiles for the AGL/LOD Pairs to switch between (manually but dynamically).
-  - Profile list names can be edited in the app by double clicking on the profile combo box to toggle edit-ability, with non-editable being the initial state on startup. Press Enter, press Tab or click on another control on the app UI for the changed text to be accepted.
+  - Uer Profiles:
+    - You have six different Sets/Profiles for the AGL/LOD Pairs to switch between (manually but dynamically).
+    - Profile list names can be edited in the app by double clicking on the profile combo box to toggle edit-ability, with non-editable being the initial state on startup.
+    - When in edit mode, press Enter, press Tab or click on another control on the app UI for the changed text to be accepted.
   - Cruise LOD Updates, when checked, will continue to update LOD values based on AGL in the cruise phase, which is useful for VFR flights over undulating terrain and has an otherwise negligible impact on high level or IFR flights so it is recommended to enable this.
   - LOD Step Max, when checked, allows the utility to slow the rate of change in LOD per second, with increase and decrease being individually settable, to smooth out LOD table changes. This allows you to have large steps in your LOD tables without experiencing abrupt changes like having it disabled would do, hence it is recommended to turn it on and start out with the default steps of 5.
   - Redetect button - Redetects PC/FG/LSFG/VR graphics mode if changed by the user after commencing a flight, now necessary because the app no longer needlessly polls repetitively for graphics mode changes.
