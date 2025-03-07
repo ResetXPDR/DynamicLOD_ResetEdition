@@ -146,7 +146,7 @@ Some Notes:
   - Will not show valid values unless all three connections are green.
   - Red values mean FPS Adaption is active, orange means LOD stepping is active, black means steady state, n/a means not available right now.
 - General
-  - Uer Profiles:
+  - User Profiles:
     - You have six different Sets/Profiles for the AGL/LOD Pairs to switch between (manually but dynamically).
     - Profile list names can be edited in the app by double clicking on the profile combo box to toggle edit-ability, with non-editable being the initial state on startup.
     - When in edit mode, press Enter, press Tab or click on another control on the app UI for the changed text to be accepted.
