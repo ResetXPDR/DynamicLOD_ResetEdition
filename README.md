@@ -15,6 +15,7 @@ Now fully compatible with MSFS 2020 and 2024 in the one app, this app builds upo
 - Auto future MSFS version compatibility, provided MSFS memory changes are like in previous updates,<br/>
 - Update prompt if newer utility version found on start-up,<br/>
 - Custom profile naming,<br/> 
+- Auto installation of app updates (optional except for mandatory updates),
 - Auto disabling of Dynamic Settings in MSFS 2024 while this app is active, to prevent settings contention,
 - Auto restoration of original settings changed by the utility,<br/>
 - Enhanced saving and restoration of MSFS settings by the app to better withstand MSFS CTDs,<br/>
