@@ -54,7 +54,9 @@ How does this app work for Frame Generation (FG) users?
 - Detection of all FG types other than LSFG is automatic within 5 seconds of making the change. Detection of LSFG is normally only performed upon starting a flight. If LSFG is started after this detection is normally performed, press the Reset button for it to be detected.
 - Only one type of FG can be active at a time for the app to show FPS correctly. In particular, using native nVidia or the FG mod AND LSFG will cause incorrect FPS calculations in the app because they function differently when MSFS loses focus. Choose one or the other if you want to use them with this app.
 
-This utility can be installed concurrent with any DynamicLOD variant. You just shouldn't run them at the same time, as they would both be fighting each other with MSFS settings. This app can detect whether itself, a previous DynamicLOD variant, MSFS2020_AutoFPS, MSFS_AutoFPS, MSFS2024_AutoFPS or Smoothflight is running and will quit if it encounters one.</br>
+My default MSFS graphics settings are messed up and each time I try to change them back they get messed up again. How do I fix this?
+- You are likely trying to change these default MSFS settings while the app is still running and you are in an active flight, where the app will override any such changes you try to make.
+- Either exit the app completely or be in the MSFS main menu (ie. NOT in a flight), then you can go to the MSFS settings screen and change your default MSFS settings to what you want and the app will restore these at the conclusion of a flight session or upon exiting.This utility can be installed concurrent with any DynamicLOD variant. You just shouldn't run them at the same time, as they would both be fighting each other with MSFS settings. This app can detect whether itself, a previous DynamicLOD variant, MSFS2020_AutoFPS, MSFS_AutoFPS, MSFS2024_AutoFPS or Smoothflight is running and will quit if it encounters one.</br>
 
 If you are not familiar with what MSFS graphics settings do, specifically TLOD, OLOD and cloud quality, and don't understand the consequences of changing them, it is highly recommended you do not use this utility.
 <br/><br/>
@@ -64,7 +66,8 @@ This utility is unsigned because I am a hobbyist and the cost of obtaining certi
 ## Requirements
 
 The Installer will install the following Software:
-- .NET 7 Desktop Runtime (x64)
+- .NET 8 Desktop Runtime (x64)
+- Visual C++ Redistributable (x64)
 - MobiFlight Event/WASM Module
 
 <br/>
@@ -87,7 +90,9 @@ Some Notes:
   - If the installer fails when checking/updating Mobiflight, despite the latest version being correctly installed in your MSFS Community folder, create a shortcut for the installer, add the command line option "-bypassmobiflight" to the target text box, then run the shortcut to be able to bypass this installation step.
 - Do not run the Installer as Admin!
 - If you wish to retain your settings for an update version, do NOT uninstall first, as that deletes all app files, including the config file. Just run the installer, select update and your settings will be retained.
-- The clean install option will recreate new configuration files without having to remove the app first.
+- The "Clean Install" option will recreate new configuration files without having to remove the app first.
+- The "Install Latest Redistributables" option will silently (other than UAC prompts) update your system with the latest Visual C++ Redistributable and .NET 8 runtime versions.
+  - Mandatory for initial installations, optional for manual updates, and disabled for quick updates to avoid UAC prompts.
 - If you wish to remove an Auto-Start option from a previous installation, rerun the installer and select Remove Auto-Start and the click Update.
 - For Auto-Start either your FSUIPC7.ini or EXE.xml (MSFS) is modified. The Installer does not create a Backup.
 - The utility may be blocked by Windows Security or your AV-Scanner, try if unblocking and/or setting an Exception helps (for the whole Folder)
@@ -95,10 +100,16 @@ Some Notes:
   - Binary in %appdata%\DynamicLOD_ResetEdition\bin
   - Logs in %appdata%\DynamicLOD_ResetEdition\log
   - Config: %appdata%\DynamicLOD_ResetEdition\DynamicLOD_ResetEdition.config
-- If after installing and running the app your simconnect always stays red:
-  - Try downloading and installing a Microsoft official version of “Microsoft Visual C++ 2015 - 2022 Redistributable”, which may be missing from your Windows installation.
-  - If still not resolved and the error code in your DynamicLOD_ResetEdition log file is Exception 31, you most likely have a corrupt MSFS installation so you can choose to either not run this app or to reinstall MSFS completely. 
-- If you get an "Unable to attach MSFS - app disabled." message, the most likely cause is that MSFS and this app are running at different permission privilege levels and/or your anti-virus/malware app is blocking this app. To resolve, try the following:
+- If after installing and running the app your simconnect always stays red, your TLOD and OLOD values show as zero or you see "Critical Exception occurred: DynamicLOD_ResetEdition - Unable to load DLL 'GpuzShMem.x64.dll' or one of its dependencies" in the log file:
+  - Try reinstalling the app with the "Clean Install" and "Install Latest Redistributables" options selected.
+  - Try downloading and installing/repairing a Microsoft official version of “Microsoft Visual C++ 2015 - 2022 Redistributable”, which may be missing from your Windows installation. Try installing [this](https://aka.ms/vs/17/release/vc_redist.x86.exe) and [this](https://aka.ms/vs/17/release/vc_redist.x64.exe).
+  - Try downloading and installing/repairing the NET desktop runtime from [here](https://builds.dotnet.microsoft.com/dotnet/WindowsDesktop/8.0.15/windowsdesktop-runtime-8.0.15-win-x64.exe) if still available. Alternatively, go to the Micrsoft .NET 8.0 download page [here](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) and download and install the latest .NET Desktop Runtime X64 version.
+  - If still not resolved and the error code in your AutoFPS log file is Exception 31, you most likely have a corrupt MSFS installation so you can choose to either not run this app or to reinstall MSFS completely.
+  - If reinstalling MSFS 2024, you need to do a clean install, as outlined for your MSFS version [here](https://flightsimulator.zendesk.com/hc/en-us/articles/17335196046108-How-to-clean-install-the-simulator-on-PC).
+    - **Ensure you backup/relocate your Community folder BEFORE you do this, then put it back when the resintallation is complete.**
+    - Only takes around 15 minutes to complete and all your settings, controller assignments, career progression and your pilot profile are retained.
+- If you get an "Unable to attach MSFS - app disabled." message, the most likely causes are that MSFS is loading in very slowly and the attachment process is timing out, MSFS and this app are running at different permission privilege levels, or your anti-virus/malware app is blocking this app. To resolve, try the following:
+  - Restart this app after MSFS has loaded in to the main menu.
   - Check that MSFS is not running as administrator.
   - Set an exclusion for this app in your anti-virus/malware app.
   - If all else fails, try running this app as administrator.
@@ -107,11 +118,13 @@ Some Notes:
     - First, try exiting this app, go to the MSFS settings menu, toggle any simple setting eg. vsync, save changes then restart this app.
     - If that doesn't work, try exiting this app and MSFS completely, start this app then start MSFS.
   - There is an issue with permissions and you may need to run the app as Administrator. 
-  - You may have changed MSFS settings in your usercfg.opt file beyond what is possible to set in the MSFS settings menu. To rectify, go into MSFS settings at the main menu and reset to default (F12) the graphics settings for both PC and VR mode, then make all changes to MSFS within the MSFS settings menu.
+  - You may have changed MSFS settings in your UserCfg.opt file beyond what is possible to set in the MSFS settings menu. To rectify, go into MSFS settings at the main menu and reset to default (F12) the graphics settings for both PC and VR mode, then make all changes to MSFS within the MSFS settings menu.
   - A new version of MSFS has come out that has a different memory map to what the app expects and the app can't auto adjust to the new memory location for MSFS settings. If so, I will likely be already aware of it and working on a solution, but if you may be one of the first to encounter it (eg. on an MSFS beta) then please raise an issue on github or contribute to an existing one if it has already been raised.
-- If you get a message when starting the app that you need to install .NET desktop runtime, manually download it from [here](https://dotnet.microsoft.com/en-us/download/dotnet/7.0).
 - If you get an error message saying "XML Exception: Unexpected XML declaration" or "Exception: 'System.Xml.XMlException' during AutostartExe" when trying to install with the auto-start option for MSFS, it usually means your EXE.xml file has a corrupted data structure. To resolve, copy the content of your EXE.xml into MS Copilot and ask it to check and correct it for you. Paste the fixed structure back into your EXE.xml file, save it, then try reinstalling again.
-- To uninstall, run the installer and select remove on the first window. This will remove all traces of the app, including the desktop icon, MSFS or FSUIPC autostart entries if you used them, and the entire app folder, including your configuration file.
+- To uninstall
+  - Ensure you have completely exited the app (ie. it is not hiding still running in your SysTray),
+  - Run the installer and select Remove on the first window.
+  - This will remove all traces of the app, including the desktop icon, MSFS or FSUIPC autostart entries if you used them, and the entire app folder, including your configuration file.
 
 <br/><br/>
 
