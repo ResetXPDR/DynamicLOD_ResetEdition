@@ -1,11 +1,11 @@
-# DynamicLOD_ResetEdition
+# DynamicLOD_ResetEdition (Updated for 0.4.6)
 
 Based on muumimorko's idea and code in MSFS_AdaptiveLOD, as further developed by Fragtality in DynamicLOD and myself in MSFS2020_AutoFPS and MSFS_AutoFPS.<br/>
 
 Now fully compatible with MSFS 2020 and 2024 in the one app, this app builds upon the functionality provided in DynamicLOD, which aims to improve MSFS performance and smoothness by dynamically changing the TLOD and OLOD based on the current AGL, and provides additional features such as:<br/>
 - Automatically detects and displays the MSFS version in use and keeps separate settings for each MSFS version and a single log file for both.
 - Remembers which MSFS version you last used the app with and will start up next time with the settings for that MSFS version.
-- Simultaneous PC, FG (native nVidia, MFG, FG mod or Lossless Scaling), and VR mode compatibility, including correct FG FPS display, and separate FPS targets for each mode,<br/>
+- Simultaneous PC, FG (native nVidia, MFG, FG mod, FSR3 or Lossless Scaling), and VR mode compatibility, including correct FG FPS display, and separate FPS targets for each mode,<br/>
 - Optional LOD updates in cruise,<br/> 
 - Optional predictive incremental steps between LOD changes to improve smoothness,<br/>
 - Optional cloud quality decrease with FPS Adaption,<br/>
@@ -13,7 +13,6 @@ Now fully compatible with MSFS 2020 and 2024 in the one app, this app builds upo
 - Automatic pause when MSFS loses focus option, particularly useful if using native nVidia FG due to varying FPS when MSFS gains or loses focus,<br/>
 - Automatic FPS settling timer on MSFS graphics mode and focus changes to allow FPS to stabilise before being acted upon,<br/>
 - Auto future MSFS version compatibility, provided MSFS memory changes are like in previous updates,<br/>
-- Update prompt if newer utility version found on start-up,<br/>
 - Custom profile naming,<br/> 
 - Auto installation of app updates (optional except for mandatory updates),
 - Auto disabling of Dynamic Settings in MSFS 2024 while this app is active, to prevent settings contention,
@@ -45,12 +44,14 @@ How does this app work for Frame Generation (FG) users?
   - If such an MSFS2020 or MSFS2024 profile does not exist then the settings in the Default profile will be used.
   - When adaptive frame generation is detected, a base FPS will be used for the target FPS because the frame generation multiplier is variable and is not currently detectable.
   - If you make changes to your LS settings after starting a flight, press AutoFPS's Reset button so that AutoFPS can redetect them correctly.
+- FSR3 FG is now supported for MSFS 2024 as of SU2.
+  - Although FSR3 FG can be implemented with an adaptive multiplier, MSFS currently implements it with a fixed 2X multiplier that is active regardless of whether MSFS has the focus or not.
 - Multi Frame Generation, available only for users with 5000 series nVidia GPUs, is unable to be auto detected by the app at this time due to the privileged access need to read this setting.
   - In the interim, a manual MFG multiplier and target MFG FPS selection will be presented on the UI when a 5000 series nVidia GPU is detected.
   - Match the app's MFG multiplier with what you have set for MFG with MSFS in nVidia settings.
   - Set to MFG Off if not using MFG or using an alternative FG method.
   - Feature can be removed by the user setting MfgModeMultEnabled to false in MSFS_AutoFPS.config in the app root directory.
-- Detection of FG is normally only performed upon starting a flight. If FG is enabled or LS is started after this detection is normally performed, press the Reset button for it to be detected.
+- Detection of all FG types other than LSFG is automatic within 5 seconds of making the change. Detection of LSFG is normally only performed upon starting a flight. If LSFG is started after this detection is normally performed, press the Reset button for it to be detected.
 - Only one type of FG can be active at a time for the app to show FPS correctly. In particular, using native nVidia or the FG mod AND LSFG will cause incorrect FPS calculations in the app because they function differently when MSFS loses focus. Choose one or the other if you want to use them with this app.
 
 This utility can be installed concurrent with any DynamicLOD variant. You just shouldn't run them at the same time, as they would both be fighting each other with MSFS settings. This app can detect whether itself, a previous DynamicLOD variant, MSFS2020_AutoFPS, MSFS_AutoFPS, MSFS2024_AutoFPS or Smoothflight is running and will quit if it encounters one.</br>
@@ -158,7 +159,9 @@ Some Notes:
   - Status Message - On app start-up indicates key system messages, such as:
     - Before loading a flight - whether a newer version of the app is available to download and install
     - Loading in to a flight - whether the MSFS memory integrity test has failed, and
-    - Flight is loaded - showing detected DX version, Graphics Mode (PC, FG, LSFG or VR), and app pause or FPS settling time status as applicable. The FPS settling timer runs for 6 seconds to allow FPS to settle between pausing/unpausing and PC/FG/LSFG/VR mode transitions. This allows the FPS to stabilise before engaging automatic functions and should lead to much smaller TLOD changes when seeking the target FPS on such transitions.
+    - Flight is loaded
+      - Shows current sim rate with a range of 0.125X to 16X, which will display at the start of the app status line for any value except 1X, detected DX version (MSFS 2020 only), Graphics Mode (PC, FG, LSFG, MFG, FSR3 or VR), and app pause or FPS settling time status as applicable.
+      - The FPS settling timer runs for 6 seconds to allow FPS to settle between pausing/unpausing and PC/FG/LSFG/VR mode transitions. This allows the FPS to stabilise before engaging automatic functions and should lead to much smaller TLOD changes when seeking the target FPS on such transitions.
 - LOD Level Tables
   - The first Pair with AGL 0 can not be deleted. The AGL can not be changed. Only the xLOD.
   - Additional Pairs can be added at any AGL and xLOD desired. Pairs will always be sorted by AGL.
