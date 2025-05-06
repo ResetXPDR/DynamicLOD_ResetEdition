@@ -1,4 +1,4 @@
-# DynamicLOD_ResetEdition (Updated for 0.4.6)
+# DynamicLOD_ResetEdition (Updated for 0.4.7)
 
 Based on muumimorko's idea and code in MSFS_AdaptiveLOD, as further developed by Fragtality in DynamicLOD and myself in MSFS2020_AutoFPS and MSFS_AutoFPS.<br/>
 
@@ -41,7 +41,7 @@ How does this app work for Frame Generation (FG) users?
 - Lossless Scaling (LS) FG, including the scaling multiplier used, is also detected and the correct LSFG multiplied FPS is displayed.
   - Make sure your LSFG app is updated to the latest version that supports LSFG 3.0 (2.13.2 or later).
   - The app will first try to use an LS profile with the specific name MSFS2020 or MSFS2024, depending on which MSFS version is currently in use, to obtain these settings.
-  - If such an MSFS2020 or MSFS2024 profile does not exist then the settings in the Default profile will be used.
+  - If such an MSFS2020 or MSFS2024 profile does not exist then the settings in the first profile found in the config file, usually named Default, will be used.
   - When adaptive frame generation is detected, a base FPS will be used for the target FPS because the frame generation multiplier is variable and is not currently detectable.
   - If you make changes to your LS settings after starting a flight, press AutoFPS's Reset button so that AutoFPS can redetect them correctly.
 - FSR3 FG is now supported for MSFS 2024 as of SU2.
@@ -154,7 +154,7 @@ Some Notes:
   - Can be shown at any time by double clicking, or right-click select Show Window, on the app icon in the system tray.
 - Connection Status
   - Red values indicate not connected, green is connected.
-  - Automatically identifies which MSFS version is in use as either MSFS2020 or MSFS2024. 
+  - Automatically identifies which MSFS version is in use as either MSFS2020 or MSFS2024 and the version number.
   - If the sim version is showing in red and is not the MSFS version you wish to configure before starting that MSFS version, click the 20->24 or 24->20 button, as applicable, and it will change to that.
 - Sim Values
   - Will not show valid values unless all three connections are green.
