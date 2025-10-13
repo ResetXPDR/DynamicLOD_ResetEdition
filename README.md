@@ -1,4 +1,4 @@
-# DynamicLOD_ResetEdition v0.5.0
+# DynamicLOD_ResetEdition v0.5.1
 
 Based on muumimorko's idea and code in MSFS_AdaptiveLOD, as further developed by Fragtality in DynamicLOD and myself in MSFS2020_AutoFPS and MSFS_AutoFPS.<br/>
 
@@ -93,7 +93,7 @@ Some Notes:
 - The "Install Latest Redistributables" option will silently (other than UAC prompts) update your system with the latest Visual C++ Redistributable and .NET 8 runtime versions.
   - Mandatory for initial installations, optional for manual updates, and disabled for quick updates to avoid UAC prompts.
 - If you wish to remove an Auto-Start option from a previous installation, rerun the installer and select Remove Auto-Start and the click Update.
-- For Auto-Start either your FSUIPC7.ini or EXE.xml (MSFS) is modified. The Installer does not create a Backup.
+- For Auto-Start either your FSUIPC7.ini or EXE.xml (MSFS) for the applicable MSFS versions installed is/are modified. The Installer does not create a Backup.
 - The utility may be blocked by Windows Security or your AV-Scanner, try if unblocking and/or setting an Exception helps (for the whole Folder)
 - The Installation-Location is fixed to %appdata%\DynamicLOD_ResetEdition (your Users AppData\Roaming Folder) and can't be changed.
   - Binary in %appdata%\DynamicLOD_ResetEdition\bin
@@ -118,7 +118,10 @@ Some Notes:
     - If that doesn't work, try exiting this app and MSFS completely, start this app then start MSFS.
   - There is an issue with permissions and you may need to run the app as Administrator. 
   - You may have changed MSFS settings in your UserCfg.opt file beyond what is possible to set in the MSFS settings menu. To rectify, go into MSFS settings at the main menu and reset to default (F12) the graphics settings for both PC and VR mode, then make all changes to MSFS within the MSFS settings menu.
-  - A new version of MSFS has come out that has a different memory map to what the app expects and the app can't auto adjust to the new memory location for MSFS settings. If so, I will likely be already aware of it and working on a solution, but if you may be one of the first to encounter it (eg. on an MSFS beta) then please raise an issue on github or contribute to an existing one if it has already been raised.
+  - A new version of MSFS may introduce a different memory map than expected, preventing the app from auto‑adjusting to the new settings location.
+    - In this case, the app will attempt to offer an auto‑update to the version most likely to be compatible. This may be a test build if no stable release is available.
+    - Release‑channel users temporarily moved to a test build for compatibility will revert to release‑only updates with the next formal version (manual opt‑in to test updates remains available).
+    - If no suitable auto‑update is found, or if the update does not achieve compatibility, I am likely already aware and working on a solution. However, if you may be among the first to encounter the issue (e.g. on an MSFS beta), please raise a new issue on GitHub or contribute to an existing one.
 - If you get an error message saying "XML Exception: Unexpected XML declaration" or "Exception: 'System.Xml.XMlException' during AutostartExe" when trying to install with the auto-start option for MSFS, it usually means your EXE.xml file has a corrupted data structure. To resolve, copy the content of your EXE.xml into MS Copilot and ask it to check and correct it for you. Paste the fixed structure back into your EXE.xml file, save it, then try reinstalling again.
 - To uninstall
   - Ensure you have completely exited the app (ie. it is not hiding still running in your SysTray),
