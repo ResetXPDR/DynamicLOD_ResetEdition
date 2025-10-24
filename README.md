@@ -1,4 +1,4 @@
-# DynamicLOD_ResetEdition v0.5.1
+# DynamicLOD_ResetEdition v0.5.2
 
 Based on muumimorko's idea and code in MSFS_AdaptiveLOD, as further developed by Fragtality in DynamicLOD and myself in MSFS2020_AutoFPS and MSFS_AutoFPS.<br/>
 
@@ -141,8 +141,10 @@ Some Notes:
     - **Show Updates** displays available updates and download links.
     - **Mandatory Updates Only** displays and installs only mandatory updates.
     - **+ Test** opts users into test version updates.
-      - Test version users will have **+ Test** force enabled and greyed out.
+      - Test version users who opt out of **+ Test** will be offered a one-time automatic rollback to the latest formal release.
       - **Mandatory Updates Only** will be unavailable until the app updates to a release version.
+      - Auto‑updates for test versions run a shorter process than release versions, as they assume all core components are already up to date.
+    - **Compatibility Updates** may be auto-offered if the app fails its compatibility check and a matching update is available—potentially a test build if no stable version exists.
     - App startup sequence ensures update check is completed before connecting to MSFS.
   - Starting manually: anytime, but preferably before MSFS or in the Main Menu. The utility will stop itself when MSFS closes.  
   - Closing the Window does not close the utility, use the Context Menu of the SysTray Icon.
