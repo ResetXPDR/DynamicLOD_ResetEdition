@@ -1,4 +1,4 @@
-# DynamicLOD_ResetEdition v0.5.1
+# DynamicLOD_ResetEdition v0.5.2
 
 Based on muumimorko's idea and code in MSFS_AdaptiveLOD, as further developed by Fragtality in DynamicLOD and myself in MSFS2020_AutoFPS and MSFS_AutoFPS.<br/>
 
@@ -103,10 +103,14 @@ Some Notes:
   - Try reinstalling the app with the "Clean Install" and "Install Latest Redistributables" options selected. If any of the redistributables fail to install during this process, try downloading and installing/repairing (as applicable):
     - A Microsoft official version of “Microsoft Visual C++ 2015 - 2022 Redistributable”, which may be missing from your Windows installation. Try installing [this](https://aka.ms/vs/17/release/vc_redist.x86.exe) and [this](https://aka.ms/vs/17/release/vc_redist.x64.exe).
     - The NET desktop runtime from [here](https://builds.dotnet.microsoft.com/dotnet/WindowsDesktop/8.0.15/windowsdesktop-runtime-8.0.15-win-x64.exe) if still available. Alternatively, go to the Micrsoft .NET 8.0 download page [here](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) and download and install the latest .NET Desktop Runtime X64 version.
-  - If still not resolved and the error code in your AutoFPS log file is Exception 31, you most likely have a corrupt MSFS installation so you can choose to either not run this app or to reinstall MSFS completely.
-  - If reinstalling MSFS 2024, you need to do a clean install, as outlined for your MSFS version [here](https://flightsimulator.zendesk.com/hc/en-us/articles/17335196046108-How-to-clean-install-the-simulator-on-PC).
-    - **Ensure you backup/relocate your Community folder BEFORE you do this, then put it back when the reinstallation is complete.**
-    - Only takes around 15 minutes to complete and all your settings, controller assignments, career progression and your pilot profile are retained.
+  - If still not resolved and the error code in your AutoFPS log file is Exception 31, you most likely have a corrupt MSFS WASM installation.
+    - First, try deleting the MSFS WASM folder, located under the Microsoft Flight Simulator directory in either %appdata% or %localappdata% for Steam and MS Store install directories respectively, which will rebuild when you next run MSFS.
+    - If that doesn't fix it, a full clean reinstall of MSFS will be required, which can be done in less than 15 minutes for MSFS 2024 but may take many hours for MSFS 2020.
+      - If reinstalling MSFS 2024, you need to do a **CLEAN** install, not just an uninstall/reinstall as doing the latter does not remove the likely-offending MSFS appdata folder and hence will not resolve the issue.
+        - **Backup or relocate your Community folder before proceeding, and restore it after reinstallation is complete.**
+        - Follow the **CLEAN** install instructions outlined for your MSFS version [here](https://flightsimulator.zendesk.com/hc/en-us/articles/17335196046108-How-to-clean-install-the-simulator-on-PC) **EXPLICITLY**. Do NOT skip the step where you manually delete the MSFS install in your user folder.
+        - All your settings, controller assignments, career progression and your pilot profile are retained.
+        - If you chose not to restore your Community folder, you will need to install this app again to install the required mobiflight module there.
 - If you get an "Unable to attach MSFS - app disabled." message, the most likely causes are that MSFS is loading in very slowly and the attachment process is timing out, MSFS and this app are running at different permission privilege levels, or your anti-virus/malware app is blocking this app. To resolve, try the following:
   - Restart this app after MSFS has loaded in to the main menu.
   - Check that MSFS is not running as administrator.
@@ -134,7 +138,11 @@ Some Notes:
 
 - General
   - Update Management
-    - **Auto Updates** (default) will auto-install updates.
+    - **Silent Updates** install updates automatically without prompts, except for compatibility updates and reversion from test versions, which are always prompted.
+      - The installer window appears briefly during the update process and release notes are shown afterwards, with no user interaction required.
+      - A one‑time migration prompt is provided for existing Prompted Updates users to switch to Silent Updates.
+      - Older versions of the app that don’t recognise Silent Updates will continue to treat this setting as Prompted Updates, ensuring full backward compatibility.
+    - **Prompted Updates** (default) automatically install updates but seeks user confirmation for updates and displays release notes.
       - Mandatory updates will auto install regardless of user settings.
       - Optional updates will seek user confirmation and switch to **Show Updates** if declined.
       - Installer runs automatically, showing Release Notes in Notepad and auto-starting the new version.
@@ -161,6 +169,9 @@ Some Notes:
 - Sim Values
   - Will not show valid values unless all three connections are green.
   - Red values mean FPS Adaption is active, orange means LOD stepping is active, black means steady state, n/a means not available right now.
+  - When MSFS is detected and **NOT** in a flight session:
+    - Default **TLOD**, **OLOD**, and **Cloud Quality** values are displayed and refresh within one second of changes made in the MSFS settings menu.
+    - **VR‑specific defaults** show automatically when in VR mode.
 - General
   - User Profiles:
     - You have six different Sets/Profiles for the AGL/LOD Pairs to switch between (manually but dynamically).
