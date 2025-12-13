@@ -1,4 +1,4 @@
-# DynamicLOD_ResetEdition v0.5.2
+# DynamicLOD_ResetEdition v0.5.3
 
 Based on muumimorko's idea and code in MSFS_AdaptiveLOD, as further developed by Fragtality in DynamicLOD and myself in MSFS2020_AutoFPS and MSFS_AutoFPS.<br/>
 
