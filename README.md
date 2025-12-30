@@ -1,4 +1,4 @@
-# DynamicLOD_ResetEdition v0.5.3
+# DynamicLOD_ResetEdition v0.5.4
 
 Based on muumimorko's idea and code in MSFS_AdaptiveLOD, as further developed by Fragtality in DynamicLOD and myself in MSFS2020_AutoFPS and MSFS_AutoFPS.<br/>
 
@@ -81,6 +81,11 @@ The Installer will install the following Software:
 Basically: Just run the Installer.<br/>
 
 Some Notes:
+- Install Options:
+  - Desktop Icon: Create a desktop icon for the app.
+  - Reset Configs: Resets the app Common, MSFS 2020 and MSFS 2024 config files.
+  - Repair: Reinstalls core files, including latest Visual C++ Redistributable and .NET 8 runtime versions, and MobiFlight, keeping your app config intact.
+  - Auto Start Options: Remove, Retain, FSUIPC (via FSUIPC.ini) or MSFS (via EXE.xml).
 - DynamicLOD_ResetEdition has to be stopped before installing.
 - Mobiflight Module:
   - If the installer can't locate your Community folder to install this module, perhaps because of a Custom MSFS install location, download the latest module version from [here](https://github.com/MobiFlight/MobiFlight-WASM-Module/releases) and manually extract to your Community folder.
@@ -89,22 +94,17 @@ Some Notes:
   - If the installer fails when checking/updating Mobiflight, despite the latest version being correctly installed in your MSFS Community folder, create a shortcut for the installer, add the command line option "-bypassmobiflight" to the target text box, then run the shortcut to be able to bypass this installation step.
 - Do not run the Installer as Admin!
 - If you wish to retain your settings for an update version, do NOT uninstall first, as that deletes all app files, including the config file. Just run the installer, select update and your settings will be retained.
-- The "Clean Install" option will recreate new configuration files without having to remove the app first.
-- The "Install Latest Redistributables" option will silently (other than UAC prompts) update your system with the latest Visual C++ Redistributable and .NET 8 runtime versions.
-  - Mandatory for initial installations, optional for manual updates, and disabled for quick updates to avoid UAC prompts.
-- If you wish to remove an Auto-Start option from a previous installation, rerun the installer and select Remove Auto-Start and the click Update.
-- For Auto-Start either your FSUIPC7.ini or EXE.xml (MSFS) for the applicable MSFS versions installed is/are modified. The Installer does not create a Backup.
 - The utility may be blocked by Windows Security or your AV-Scanner, try if unblocking and/or setting an Exception helps (for the whole Folder)
 - The Installation-Location is fixed to %appdata%\DynamicLOD_ResetEdition (your Users AppData\Roaming Folder) and can't be changed.
   - Binary in %appdata%\DynamicLOD_ResetEdition\bin
   - Logs in %appdata%\DynamicLOD_ResetEdition\log
   - Config: %appdata%\DynamicLOD_ResetEdition\DynamicLOD_ResetEdition.config
-- If after installing and running the app your simconnect always stays red, your TLOD and OLOD values show as zero or you see "Critical Exception occurred: DynamicLOD_ResetEdition - Unable to load DLL 'GpuzShMem.x64.dll' or one of its dependencies" in the log file:
-  - Try reinstalling the app with the "Clean Install" and "Install Latest Redistributables" options selected. If any of the redistributables fail to install during this process, try downloading and installing/repairing (as applicable):
+- If after installing and running the app your simconnect always stays red, your TLOD and OLOD values show as zero or you see "Critical Exception occurred: MSFS_AutoFPS - Unable to load DLL 'GpuzShMem.x64.dll' or one of its dependencies" in the log file:
+  - Try reinstalling the app with the Repair option selected, then reboot. If any of the redistributables fail to install during this process, try downloading and installing/repairing (as applicable):
     - A Microsoft official version of “Microsoft Visual C++ 2015 - 2022 Redistributable”, which may be missing from your Windows installation. Try installing [this](https://aka.ms/vs/17/release/vc_redist.x86.exe) and [this](https://aka.ms/vs/17/release/vc_redist.x64.exe).
     - The NET desktop runtime from [here](https://builds.dotnet.microsoft.com/dotnet/WindowsDesktop/8.0.15/windowsdesktop-runtime-8.0.15-win-x64.exe) if still available. Alternatively, go to the Micrsoft .NET 8.0 download page [here](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) and download and install the latest .NET Desktop Runtime X64 version.
-  - If still not resolved and the error code in your AutoFPS log file is Exception 31, you most likely have a corrupt MSFS WASM installation.
-    - First, try deleting the MSFS WASM folder, located under the Microsoft Flight Simulator directory in either %appdata% or %localappdata% for Steam and MS Store install directories respectively, which will rebuild when you next run MSFS.
+  - If still not resolved and the error code in your DLOD_RE log file is Exception 31, you most likely have a corrupt MSFS WASM installation.
+    - First, try deleting the MSFS WASM folder, located under the Microsoft Flight Simulator directory in either %appdata% or %localappdata% for Steam and MS Store install directories respectively, which will rebuild when you next run MSFS. Rebooting is also recommended.
     - If that doesn't fix it, a full clean reinstall of MSFS will be required, which can be done in less than 15 minutes for MSFS 2024 but may take many hours for MSFS 2020.
       - If reinstalling MSFS 2024, you need to do a **CLEAN** install, not just an uninstall/reinstall as doing the latter does not remove the likely-offending MSFS appdata folder and hence will not resolve the issue.
         - **Backup or relocate your Community folder before proceeding, and restore it after reinstallation is complete.**
