@@ -1,4 +1,4 @@
-# DynamicLOD_ResetEdition v0.5.3
+# DynamicLOD_ResetEdition v0.5.4
 
 Based on muumimorko's idea and code in MSFS_AdaptiveLOD, as further developed by Fragtality in DynamicLOD and myself in MSFS2020_AutoFPS and MSFS_AutoFPS.<br/>
 
@@ -81,6 +81,11 @@ The Installer will install the following Software:
 Basically: Just run the Installer.<br/>
 
 Some Notes:
+- Install Options:
+  - Desktop Icon: Create a desktop icon for the app.
+  - Reset Configs: Resets the app Common, MSFS 2020 and MSFS 2024 config files.
+  - Repair: Reinstalls core files, including latest Visual C++ Redistributable and .NET 8 runtime versions, and MobiFlight, keeping your app config intact.
+  - Auto Start Options: Remove, Retain, FSUIPC (via FSUIPC.ini) or MSFS (via EXE.xml).
 - DynamicLOD_ResetEdition has to be stopped before installing.
 - Mobiflight Module:
   - If the installer can't locate your Community folder to install this module, perhaps because of a Custom MSFS install location, download the latest module version from [here](https://github.com/MobiFlight/MobiFlight-WASM-Module/releases) and manually extract to your Community folder.
@@ -89,11 +94,6 @@ Some Notes:
   - If the installer fails when checking/updating Mobiflight, despite the latest version being correctly installed in your MSFS Community folder, create a shortcut for the installer, add the command line option "-bypassmobiflight" to the target text box, then run the shortcut to be able to bypass this installation step.
 - Do not run the Installer as Admin!
 - If you wish to retain your settings for an update version, do NOT uninstall first, as that deletes all app files, including the config file. Just run the installer, select update and your settings will be retained.
-- The "Clean Install" option will recreate new configuration files without having to remove the app first.
-- The "Install Latest Redistributables" option will silently (other than UAC prompts) update your system with the latest Visual C++ Redistributable and .NET 8 runtime versions.
-  - Mandatory for initial installations, optional for manual updates, and disabled for quick updates to avoid UAC prompts.
-- If you wish to remove an Auto-Start option from a previous installation, rerun the installer and select Remove Auto-Start and the click Update.
-- For Auto-Start either your FSUIPC7.ini or EXE.xml (MSFS) for the applicable MSFS versions installed is/are modified. The Installer does not create a Backup.
 - The utility may be blocked by Windows Security or your AV-Scanner, try if unblocking and/or setting an Exception helps (for the whole Folder)
 - The Installation-Location is fixed to %appdata%\DynamicLOD_ResetEdition (your Users AppData\Roaming Folder) and can't be changed.
   - Binary in %appdata%\DynamicLOD_ResetEdition\bin
