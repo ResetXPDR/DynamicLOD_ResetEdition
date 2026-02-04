@@ -62,6 +62,16 @@ If you are not familiar with what MSFS graphics settings do, especially TLOD, OL
 
 This utility is unsigned because I am a hobbyist and the cost of obtaining certification is prohibitive to me. As a result, you may get a warning message of a potentially dangerous app when you download it in a web browser like Chrome. You can either trust this download, based on feedback you can easily find on Avsim and Youtube, and run a virus scan and malware scan before you install just be sure, otherwise choose not to and not have this utility version.<br/><br/>
 
+## MSFS Clean Reinstallation Instructions
+- A CLEAN reinstall of MSFS takes **less than 15 minutes for MSFS 2024**, but can take **many hours for MSFS 2020**. For MSFS 2020, only perform this if you are experiencing major issues with the sim itself or with multiple supporting apps.
+- A **CLEAN** install is **not** the same as a normal uninstall/reinstall. A standard reinstall does **not** remove the MSFS AppData folder and will usually **not** resolve the issue.
+- **Backup or relocate your Community folder before proceeding**, and restore it after reinstallation is complete.
+- Follow the CLEAN install instructions for your MSFS version **EXACTLY** as outlined here:  
+  https://flightsimulator.zendesk.com/hc/en-us/articles/17335196046108-How-to-clean-install-the-simulator-on-PC  
+  **Do NOT skip the step where you manually delete the MSFS folder in your user directory.**
+- Your settings, controller profiles, career progression and pilot profile are all retained.
+- If you choose not to restore your Community folder, you will need to reinstall this app to restore the required Mobiflight module.
+
 ## Requirements
 
 The Installer will install the following Software:
