@@ -1,4 +1,4 @@
-# DynamicLOD_ResetEdition v0.5.5
+# DynamicLOD_ResetEdition v0.5.6
 
 Based on muumimorko's idea and code in MSFS_AdaptiveLOD, as further developed by Fragtality in DynamicLOD and myself in MSFS2020_AutoFPS and MSFS_AutoFPS.<br/>
 
@@ -46,11 +46,11 @@ How does this app work for Frame Generation (FG) users?
   - If you make changes to your LS settings after starting a flight, press AutoFPS's Reset button so that AutoFPS can redetect them correctly.
 - FSR3 FG is now supported for MSFS 2024 as of SU2.
   - Although FSR3 FG can be implemented with an adaptive multiplier, MSFS currently implements it with a fixed 2X multiplier that is active regardless of whether MSFS has the focus or not.
-- Multi Frame Generation, available only for users with 5000 series nVidia GPUs, is unable to be auto detected by the app at this time due to the privileged access need to read this setting.
-  - In the interim, a manual MFG multiplier and target MFG FPS selection will be presented on the UI when a 5000 series nVidia GPU is detected.
-  - Match the app's MFG multiplier with what you have set for MFG with MSFS in nVidia settings.
-  - Set to MFG Off if not using MFG or using an alternative FG method.
-  - Feature can be removed by the user setting MfgModeMultEnabled to false in MSFS_AutoFPS.config in the app root directory.
+- Multi Frame Generation, when set within MSFS settings, can now be auto detected in MSFS 2024 but may also be manually set in the app if MFG has been configured in nVidia settings instead.
+  - Users with 5000 series nVidia GPUs will be presented with an MFG Multiplier dropdown control on the UI.
+  - When set to Auto, the app will read the MFG setting from MSFS and configure the FPS display accordingly.
+  - When set to any other value, match the app's MFG multiplier with the MFG value you have configured for MSFS in nVidia settings.
+  - The dropdown can be removed from the UI by setting MfgModeMultEnabled to false in DynamicLODCommon_ResetEdition.config in the app root directory, after which the app will behave as if it were set to Auto.
 - Detection of all FG types other than LSFG is automatic within 5 seconds of making the change. Detection of LSFG is normally only performed upon starting a flight. If LSFG is started after this detection is normally performed, press the Reset button for it to be detected.
 - Only one type of FG can be active at a time for the app to show FPS correctly. In particular, using native nVidia or the FG mod AND LSFG will cause incorrect FPS calculations in the app because they function differently when MSFS loses focus. Choose one or the other if you want to use them with this app.
 
