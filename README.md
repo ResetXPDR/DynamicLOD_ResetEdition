@@ -172,9 +172,19 @@ Some Notes:
   - Position will be saved during the session and will restore that state on next start-up.
   - Can be shown at any time by double clicking, or right-click select Show Window, on the app icon in the system tray.
 - Connection Status
-  - Red values indicate not connected, green is connected.
-  - Automatically identifies which MSFS version is in use as either MSFS2020 or MSFS2024 and the version number.
-  - If the sim version is showing in red and is not the MSFS version you wish to configure before starting that MSFS version, click the 20->24 or 24->20 button, as applicable, and it will change to that.
+  - Red values indicate not connected, green is connected or royal blue for the Sim Version if the MSFS Performance Optimiser is enabled.
+  - Automatically identifies which MSFS version is in use as either MSFS2020 or MSFS2024 and the version number. 
+  - If the sim version is showing in red and is not the MSFS version you wish to configure before starting that MSFS version, click the 20>24 or 24>20 button, as applicable, and it will change to that.
+  - When the MSFS Performance Optimiser is enabled via the "+" checkbox to the left of the Sim Version label:
+    - The Sim Values panel reflects optimiser‑controlled states such as CPU affinity, process priority, and power‑plan selection, updating immediately when these values are applied or restored.
+    - Designed to change states only when they have not already been modified by other tools (e.g., VR Auto Optimiser, Process Lasso), ensuring no conflict with external managers.
+    - The **Sim Version text changes to royal blue** to indicate the optimiser is active and controlling MSFS.
+    - Provides four user‑configurable options in the common config file in the app's root directory:
+      - AffinityPhysicalCoreThreshold – sets the logical‑CPU cutoff for physical‑core affinity; default is 6, and set to 32 to effectively disable.
+      - AMDUseFirstCCDOnly – enables first‑CCD‑only affinity on dual‑CCD AMD CPUs; default is enabled.
+      - MSFSProcessPriority – selects the MSFS process priority; Normal, AboveNormal and High are the only allowable choices; default is High.
+      - PowerPlanEnabled – toggles automatic power‑plan switching; default is enabled.
+    - The optimiser tooltip dynamically rebuilds on load to show the active configuration, including the selected power plan, physical‑core affinity threshold, and MSFS process priority.
 - Sim Values
   - Will not show valid values unless all three connections are green.
   - Red values mean FPS Adaption is active, orange means LOD stepping is active, black means steady state, n/a means not available right now.
