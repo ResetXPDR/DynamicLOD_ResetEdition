@@ -1,4 +1,4 @@
-# DynamicLOD_ResetEdition v0.5.5
+# DynamicLOD_ResetEdition v0.5.6
 
 Based on muumimorko's idea and code in MSFS_AdaptiveLOD, as further developed by Fragtality in DynamicLOD and myself in MSFS2020_AutoFPS and MSFS_AutoFPS.<br/>
 
@@ -12,8 +12,9 @@ Now fully compatible with MSFS 2020 and 2024 in the one app, this app builds upo
 - Enhanced FPS Adaption control,<br/>
 - Automatic pause when MSFS loses focus option, particularly useful if using native nVidia FG due to varying FPS when MSFS gains or loses focus,<br/>
 - Automatic FPS settling timer on MSFS graphics mode and focus changes to allow FPS to stabilise before being acted upon,<br/>
-- Auto future MSFS version compatibility, provided MSFS memory changes are like in previous updates,<br/>
-- Custom profile naming,<br/> 
+- Auto future MSFS version compatibility, provided MSFS memory changes are minor,<br/>
+- Custom profile naming,<br/>
+- Optional MSFS Performance Optimiser which selects the best CPU core affinity, process priority, and available power plan for MSFS,<br>
 - Auto installation of app updates (optional except for mandatory updates),
 - Auto disabling of Dynamic Settings in MSFS 2024 while this app is active, to prevent settings contention,
 - Auto restoration of original settings changed by the utility,<br/>
@@ -129,7 +130,7 @@ Some Notes:
   - There is an issue with permissions and you may need to run the app as Administrator. 
   - You may have changed MSFS settings in your UserCfg.opt file beyond what is possible to set in the MSFS settings menu. To rectify, go into MSFS settings at the main menu and reset to default (F12) the graphics settings for both PC and VR mode, then make all changes to MSFS within the MSFS settings menu.
   - A new version of MSFS may introduce a different memory map than expected, preventing the app from auto‑adjusting to the new settings location.
-    - In this case, the app will attempt to offer an auto‑update to the version most likely to be compatible. This may be a test build if no stable release is available.
+    - In this case, the app will auto-install an explicitly compatible update in the first instance if one is available, otherwise it will attempt to offer an auto‑update to the version most likely to be compatible. This may be a test build if no stable release is available.
     - Release‑channel users temporarily moved to a test build for compatibility will revert to release‑only updates with the next formal version (manual opt‑in to test updates remains available).
     - If no suitable auto‑update is found, or if the update does not achieve compatibility, I am likely already aware and working on a solution. However, if you may be among the first to encounter the issue (e.g. on an MSFS beta), please raise a new issue on GitHub or contribute to an existing one.
 - If you get an error message saying "XML Exception: Unexpected XML declaration" or "Exception: 'System.Xml.XMlException' during AutostartExe" when trying to install with the auto-start option for MSFS, it usually means your EXE.xml file has a corrupted data structure. To resolve, copy the content of your EXE.xml into MS Copilot and ask it to check and correct it for you. Paste the fixed structure back into your EXE.xml file, save it, then try reinstalling again.
@@ -144,7 +145,7 @@ Some Notes:
 
 - General
   - Update Management
-    - **Silent Updates** install updates automatically without prompts, except for compatibility updates and reversion from test versions, which are always prompted.
+    - **Silent Updates** install updates automatically without prompts, except for non-explicit compatibility updates and reversion from test versions, which are always prompted.
       - The installer window appears briefly during the update process and release notes are shown afterwards, with no user interaction required.
       - A one‑time migration prompt is provided for existing Prompted Updates users to switch to Silent Updates.
       - Older versions of the app that don’t recognise Silent Updates will continue to treat this setting as Prompted Updates, ensuring full backward compatibility.
@@ -157,7 +158,9 @@ Some Notes:
     - **+ Test** opts users into test version updates.
       - Test version users will have **+ Test** force enabled and greyed out.
       - **Mandatory Updates Only** will be unavailable until the app updates to a release version.
-    - App startup sequence ensures update check is completed before connecting to MSFS.
+       - Updates for test versions run a shorter process than release versions, as they assume all core components are already up to date.
+    - **Compatibility Updates** may be auto-installed if the app fails its compatibility check and a matching update is available, which may potentially be a test build if no stable version exists.
+   - App startup sequence ensures update check is completed before connecting to MSFS.
   - Starting manually: anytime, but preferably before MSFS or in the Main Menu. The utility will stop itself when MSFS closes.  
   - Closing the Window does not close the utility, use the Context Menu of the SysTray Icon.
   - Clicking on the SysTray Icon opens the Window (again).
