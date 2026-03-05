@@ -1,4 +1,4 @@
-# DynamicLOD_ResetEdition v0.5.5
+# DynamicLOD_ResetEdition v0.5.6
 
 Based on muumimorko's idea and code in MSFS_AdaptiveLOD, as further developed by Fragtality in DynamicLOD and myself in MSFS2020_AutoFPS and MSFS_AutoFPS.<br/>
 
@@ -12,8 +12,9 @@ Now fully compatible with MSFS 2020 and 2024 in the one app, this app builds upo
 - Enhanced FPS Adaption control,<br/>
 - Automatic pause when MSFS loses focus option, particularly useful if using native nVidia FG due to varying FPS when MSFS gains or loses focus,<br/>
 - Automatic FPS settling timer on MSFS graphics mode and focus changes to allow FPS to stabilise before being acted upon,<br/>
-- Auto future MSFS version compatibility, provided MSFS memory changes are like in previous updates,<br/>
-- Custom profile naming,<br/> 
+- Auto future MSFS version compatibility, provided MSFS memory changes are minor,<br/>
+- Custom profile naming,<br/>
+- Optional MSFS Performance Optimiser which selects the best CPU core affinity, process priority, and available power plan for MSFS,<br>
 - Auto installation of app updates (optional except for mandatory updates),
 - Auto disabling of Dynamic Settings in MSFS 2024 while this app is active, to prevent settings contention,
 - Auto restoration of original settings changed by the utility,<br/>
@@ -46,12 +47,10 @@ How does this app work for Frame Generation (FG) users?
   - If you make changes to your LS settings after starting a flight, press AutoFPS's Reset button so that AutoFPS can redetect them correctly.
 - FSR3 FG is now supported for MSFS 2024 as of SU2.
   - Although FSR3 FG can be implemented with an adaptive multiplier, MSFS currently implements it with a fixed 2X multiplier that is active regardless of whether MSFS has the focus or not.
-- Multi Frame Generation, available only for users with 5000 series nVidia GPUs, is unable to be auto detected by the app at this time due to the privileged access need to read this setting.
-  - In the interim, a manual MFG multiplier and target MFG FPS selection will be presented on the UI when a 5000 series nVidia GPU is detected.
-  - Match the app's MFG multiplier with what you have set for MFG with MSFS in nVidia settings.
-  - Set to MFG Off if not using MFG or using an alternative FG method.
-  - Feature can be removed by the user setting MfgModeMultEnabled to false in MSFS_AutoFPS.config in the app root directory.
-- Detection of all FG types other than LSFG is automatic within 5 seconds of making the change. Detection of LSFG is normally only performed upon starting a flight. If LSFG is started after this detection is normally performed, press the Reset button for it to be detected.
+- Multi Frame Generation (MFG), when set within MSFS settings, can now be auto detected in MSFS 2024 but may also be manually set in the app if MFG has been configured in nVidia settings instead.
+  - When set to GFX Mode Auto, the app will read the MFG setting from MSFS and configure the FPS display accordingly.
+  - When set to any other value, match the app's FG multiplier with the MFG value you have configured for MSFS in nVidia settings.
+- Detection of all FG types is automatic within 5 seconds of making the change.
 - Only one type of FG can be active at a time for the app to show FPS correctly. In particular, using native nVidia or the FG mod AND LSFG will cause incorrect FPS calculations in the app because they function differently when MSFS loses focus. Choose one or the other if you want to use them with this app.
 
 My default MSFS graphics settings are messed up and each time I try to change them back they get messed up again. How do I fix this?
@@ -128,7 +127,7 @@ Some Notes:
   - There is an issue with permissions and you may need to run the app as Administrator. 
   - You may have changed MSFS settings in your UserCfg.opt file beyond what is possible to set in the MSFS settings menu. To rectify, go into MSFS settings at the main menu and reset to default (F12) the graphics settings for both PC and VR mode, then make all changes to MSFS within the MSFS settings menu.
   - A new version of MSFS may introduce a different memory map than expected, preventing the app from auto‑adjusting to the new settings location.
-    - In this case, the app will attempt to offer an auto‑update to the version most likely to be compatible. This may be a test build if no stable release is available.
+    - In this case, the app will auto-install an explicitly compatible update in the first instance if one is available, otherwise it will attempt to offer an auto‑update to the version most likely to be compatible. This may be a test build if no stable release is available.
     - Release‑channel users temporarily moved to a test build for compatibility will revert to release‑only updates with the next formal version (manual opt‑in to test updates remains available).
     - If no suitable auto‑update is found, or if the update does not achieve compatibility, I am likely already aware and working on a solution. However, if you may be among the first to encounter the issue (e.g. on an MSFS beta), please raise a new issue on GitHub or contribute to an existing one.
 - If you get an error message saying "XML Exception: Unexpected XML declaration" or "Exception: 'System.Xml.XMlException' during AutostartExe" when trying to install with the auto-start option for MSFS, it usually means your EXE.xml file has a corrupted data structure. To resolve, copy the content of your EXE.xml into MS Copilot and ask it to check and correct it for you. Paste the fixed structure back into your EXE.xml file, save it, then try reinstalling again.
@@ -143,7 +142,7 @@ Some Notes:
 
 - General
   - Update Management
-    - **Silent Updates** install updates automatically without prompts, except for compatibility updates and reversion from test versions, which are always prompted.
+    - **Silent Updates** install updates automatically without prompts, except for non-explicit compatibility updates and reversion from test versions, which are always prompted.
       - The installer window appears briefly during the update process and release notes are shown afterwards, with no user interaction required.
       - A one‑time migration prompt is provided for existing Prompted Updates users to switch to Silent Updates.
       - Older versions of the app that don’t recognise Silent Updates will continue to treat this setting as Prompted Updates, ensuring full backward compatibility.
@@ -156,7 +155,10 @@ Some Notes:
     - **+ Test** opts users into test version updates.
       - Test version users will have **+ Test** force enabled and greyed out.
       - **Mandatory Updates Only** will be unavailable until the app updates to a release version.
-    - App startup sequence ensures update check is completed before connecting to MSFS.
+       - Updates for test versions run a shorter process than release versions, as they assume all core components are already up to date.
+    - **Compatibility Updates** may be auto-installed if the app fails its compatibility check and a matching update is available, which may potentially be a test build if no stable version exists.
+   - App startup sequence ensures update check is completed before connecting to MSFS.
+  - The user can progressively hide parts of the UI when the app window is double clicked anywhere that is not a control. The first double click hides the two LOD Levels panels, the second hides all panels except the Connection Status and Sim Values panels, and the third restores all hidden settings sections, returning the app to its full state. The last state in use will be restored when next starting the app.
   - Starting manually: anytime, but preferably before MSFS or in the Main Menu. The utility will stop itself when MSFS closes.  
   - Closing the Window does not close the utility, use the Context Menu of the SysTray Icon.
   - Clicking on the SysTray Icon opens the Window (again).
@@ -168,9 +170,19 @@ Some Notes:
   - Position will be saved during the session and will restore that state on next start-up.
   - Can be shown at any time by double clicking, or right-click select Show Window, on the app icon in the system tray.
 - Connection Status
-  - Red values indicate not connected, green is connected.
-  - Automatically identifies which MSFS version is in use as either MSFS2020 or MSFS2024 and the version number.
-  - If the sim version is showing in red and is not the MSFS version you wish to configure before starting that MSFS version, click the 20->24 or 24->20 button, as applicable, and it will change to that.
+  - Red values indicate not connected, green is connected or royal blue for the Sim Version if the MSFS Performance Optimiser is enabled.
+  - Automatically identifies which MSFS version is in use as either MSFS2020 or MSFS2024 and the version number. 
+  - If the sim version is showing in red and is not the MSFS version you wish to configure before starting that MSFS version, click the 20>24 or 24>20 button, as applicable, and it will change to that.
+  - When the MSFS Performance Optimiser is enabled via the "+" checkbox to the left of the Sim Version label:
+    - The Sim Values panel reflects optimiser‑controlled states such as CPU affinity, process priority, and power‑plan selection, updating immediately when these values are applied or restored.
+    - Designed to change states only when they have not already been modified by other tools (e.g., VR Auto Optimiser, Process Lasso), ensuring no conflict with external managers.
+    - The **Sim Version text changes to royal blue** to indicate the optimiser is active and controlling MSFS.
+    - Provides four user‑configurable options in the common config file in the app's root directory:
+      - AffinityPhysicalCoreThreshold – sets the logical‑CPU cutoff for physical‑core affinity; default is 6, and set to 32 to effectively disable.
+      - AMDUseFirstCCDOnly – enables first‑CCD‑only affinity on dual‑CCD AMD CPUs; default is enabled.
+      - MSFSProcessPriority – selects the MSFS process priority; Normal, AboveNormal and High are the only allowable choices; default is High.
+      - PowerPlanEnabled – toggles automatic power‑plan switching; default is enabled.
+    - The optimiser tooltip dynamically rebuilds on load to show the active configuration, including the selected power plan, physical‑core affinity threshold, and MSFS process priority.
 - Sim Values
   - Will not show valid values unless all three connections are green.
   - Red values mean FPS Adaption is active, orange means LOD stepping is active, black means steady state, n/a means not available right now.
@@ -193,6 +205,7 @@ Some Notes:
     - Flight is loaded
       - Shows current sim rate with a range of 0.125X to 16X, which will display at the start of the app status line for any value except 1X, detected DX version (MSFS 2020 only), Graphics Mode (PC, FG, LSFG, MFG, FSR3 or VR), and app pause or FPS settling time status as applicable.
       - The FPS settling timer runs for 6 seconds to allow FPS to settle between pausing/unpausing and PC/FG/LSFG/VR mode transitions. This allows the FPS to stabilise before engaging automatic functions and should lead to much smaller TLOD changes when seeking the target FPS on such transitions.
+    - Graphics Mode - Set to GFX Mode Auto for the app to auto-detect most common graphics modes used with MSFS. If an unsupported FG type is in use, manually configured by selecting Man FG and the applicable multiplier in use.
 - LOD Level Tables
   - The first Pair with AGL 0 can not be deleted. The AGL can not be changed. Only the xLOD.
   - Additional Pairs can be added at any AGL and xLOD desired. Pairs will always be sorted by AGL.
