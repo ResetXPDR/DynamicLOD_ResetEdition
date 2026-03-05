@@ -48,12 +48,9 @@ How does this app work for Frame Generation (FG) users?
 - FSR3 FG is now supported for MSFS 2024 as of SU2.
   - Although FSR3 FG can be implemented with an adaptive multiplier, MSFS currently implements it with a fixed 2X multiplier that is active regardless of whether MSFS has the focus or not.
 - Multi Frame Generation (MFG), when set within MSFS settings, can now be auto detected in MSFS 2024 but may also be manually set in the app if MFG has been configured in nVidia settings instead.
-  - Users with 5000 series nVidia GPUs will be presented with an MFG Multiplier dropdown control on the UI.
-  - When set to MFG Off (Auto in upcoming v0.5.6), the app will read the MFG setting from MSFS and configure the FPS display accordingly.
-  - When set to any other value, match the app's MFG multiplier with the MFG value you have configured for MSFS in nVidia settings.
-  - A known issue in v0.5.5 is that the MFG dropdown setting isn't loaded correctly when the app starts, resulting in the MFG Off being selected by default. This will be fixed in v0.5.6.
-  - The dropdown can be removed from the UI by setting MfgModeMultEnabled to false in DynamicLODCommon_ResetEdition.config in the app root directory, after which the app will behave as if it were set to Auto.
-- Detection of all FG types other than LSFG is automatic within 5 seconds of making the change. Detection of LSFG is normally only performed upon starting a flight. If LSFG is started after this detection is normally performed, press the Reset button for it to be detected.
+  - When set to GFX Mode Auto, the app will read the MFG setting from MSFS and configure the FPS display accordingly.
+  - When set to any other value, match the app's FG multiplier with the MFG value you have configured for MSFS in nVidia settings.
+- Detection of all FG types is automatic within 5 seconds of making the change.
 - Only one type of FG can be active at a time for the app to show FPS correctly. In particular, using native nVidia or the FG mod AND LSFG will cause incorrect FPS calculations in the app because they function differently when MSFS loses focus. Choose one or the other if you want to use them with this app.
 
 My default MSFS graphics settings are messed up and each time I try to change them back they get messed up again. How do I fix this?
@@ -161,6 +158,7 @@ Some Notes:
        - Updates for test versions run a shorter process than release versions, as they assume all core components are already up to date.
     - **Compatibility Updates** may be auto-installed if the app fails its compatibility check and a matching update is available, which may potentially be a test build if no stable version exists.
    - App startup sequence ensures update check is completed before connecting to MSFS.
+  - The user can progressively hide parts of the UI when the app window is double clicked anywhere that is not a control. The first double click hides the two LOD Levels panels, the second hides all panels except the Connection Status and Sim Values panels, and the third restores all hidden settings sections, returning the app to its full state. The last state in use will be restored when next starting the app.
   - Starting manually: anytime, but preferably before MSFS or in the Main Menu. The utility will stop itself when MSFS closes.  
   - Closing the Window does not close the utility, use the Context Menu of the SysTray Icon.
   - Clicking on the SysTray Icon opens the Window (again).
@@ -207,6 +205,7 @@ Some Notes:
     - Flight is loaded
       - Shows current sim rate with a range of 0.125X to 16X, which will display at the start of the app status line for any value except 1X, detected DX version (MSFS 2020 only), Graphics Mode (PC, FG, LSFG, MFG, FSR3 or VR), and app pause or FPS settling time status as applicable.
       - The FPS settling timer runs for 6 seconds to allow FPS to settle between pausing/unpausing and PC/FG/LSFG/VR mode transitions. This allows the FPS to stabilise before engaging automatic functions and should lead to much smaller TLOD changes when seeking the target FPS on such transitions.
+    - Graphics Mode - Set to GFX Mode Auto for the app to auto-detect most common graphics modes used with MSFS. If an unsupported FG type is in use, manually configured by selecting Man FG and the applicable multiplier in use.
 - LOD Level Tables
   - The first Pair with AGL 0 can not be deleted. The AGL can not be changed. Only the xLOD.
   - Additional Pairs can be added at any AGL and xLOD desired. Pairs will always be sorted by AGL.
