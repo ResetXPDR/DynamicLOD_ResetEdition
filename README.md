@@ -200,6 +200,17 @@ Some Notes:
   - When MSFS is detected and **NOT** in a flight session:
     - Default **TLOD**, **OLOD**, and **Cloud Quality** values are displayed and refresh within one second of changes made in the MSFS settings menu.
     - **VR‑specific defaults** show automatically when in VR mode.
+  - FPS+ - shows the average FPS, filtered for spikes and dips, for the current graphics mode.
+    - Smooths out any transient FPS spikes or dips experienced - such as those caused by sudden changes in view, panning, scenery loading or other transient events - so that undesired automated MSFS setting changes are minimised.
+    - FPS values within 15% (FPS Sensitivity and Tolerance automation modes) or 10% (AutoTLOD and FPS Cap automation modes) of the current average are averaged over a 5 second rolling window of FPS values
+    - FPS values outside of this range are considered outliers and are not included in the average until a sustained change over 3 seconds in the same direction is detected.
+    - The average will recover more quickly if the very recent trend is detected to have minimal variance.
+    - Averaging period is 5 seconds.
+  - FPS source icon - RTSS (RivaTuner Statistics Server) or MSFS.
+    - **[RTSS](https://www.guru3d.com/download/rtss-rivatuner-statistics-server-download/)** is a well-established tool for FPS monitoring, widely used in the gaming community and fully compatible with MSFS.
+    - RTSS is the default FPS source and will automatically revert to MSFS as the FPS source if RTSS is not installed and running.
+    - Clicking the FPS source icon will switch the FPS source to the alternate source and the icon will change accordingly, with the added requirement that RTSS must be running in order to switch to RTSS as a source.
+    - The last used FPS source will be saved and restored upon the next app launch, when a flight session begins, or when the Reset button is pressed during a flight session.
 - General
   - User Profiles:
     - You have six different Sets/Profiles for the AGL/LOD Pairs to switch between (manually but dynamically).
