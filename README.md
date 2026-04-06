@@ -1,4 +1,4 @@
-# DynamicLOD_ResetEdition v0.5.6
+# DynamicLOD_ResetEdition v0.5.7
 
 Based on muumimorko's idea and code in MSFS_AdaptiveLOD, as further developed by Fragtality in DynamicLOD and myself in MSFS2020_AutoFPS and MSFS_AutoFPS.<br/>
 
@@ -158,37 +158,59 @@ Some Notes:
        - Updates for test versions run a shorter process than release versions, as they assume all core components are already up to date.
     - **Compatibility Updates** may be auto-installed if the app fails its compatibility check and a matching update is available, which may potentially be a test build if no stable version exists.
    - App startup sequence ensures update check is completed before connecting to MSFS.
-  - The user can progressively hide parts of the UI when the app window is double clicked anywhere that is not a control. The first double click hides the two LOD Levels panels, the second hides all panels except the Connection Status and Sim Values panels, and the third restores all hidden settings sections, returning the app to its full state. The last state in use will be restored when next starting the app.
   - Starting manually: anytime, but preferably before MSFS or in the Main Menu. The utility will stop itself when MSFS closes.  
   - Closing the Window does not close the utility, use the Context Menu of the SysTray Icon.
   - Clicking on the SysTray Icon opens the Window (again).
   - Running as Admin NOT required (BUT: It is required to be run under the same User/Elevation as MSFS).
   - Do not change TLOD, OLOD and Cloud Quality MSFS settings manually while in a flight with this app running as it will conflict with what the app is managing and they will not restore to what you set when you exit your flight. If you wish to change the defaults for these MSFS settings, you must do so either without this app running or, if it is, only while you are in the MSFS main menu (ie not in a flight).
 - App Window
-  - Position will be remembered between sessions, except movements to it made while in VR due to window restoration issues.
-  - Will automatically reset to default position (50,50) if the app is restarted within 10 seconds of last closing.
-  - Position will be saved during the session and will restore that state on next start-up.
+  - Position and minimised/maximised state will be remembered between sessions, except movements to it made while in VR due to window restoration issues.
+  - Will automatically reset to default position (50,50) if the app is restarted within 15 seconds of last closing, except if disabled by settting the AllowWindowPosReset key to false in the common config file.
   - Can be shown at any time by double clicking, or right-click select Show Window, on the app icon in the system tray.
+  - Users can progressively hide parts of the UI when the app window is double clicked anywhere that is not a control. The first double click hides the two LOD Levels panels, the second hides all panels except the Connection Status and Sim Values panels, and the third restores all hidden settings sections, returning the app to its full state. The last state in use will be restored when next starting the app.
 - Connection Status
   - Red values indicate not connected, green is connected or royal blue for the Sim Version if the MSFS Performance Optimiser is enabled.
   - Automatically identifies which MSFS version is in use as either MSFS2020 or MSFS2024 and the version number. 
   - If the sim version is showing in red and is not the MSFS version you wish to configure before starting that MSFS version, click the 20>24 or 24>20 button, as applicable, and it will change to that.
-  - When the MSFS Performance Optimiser is enabled via the "+" checkbox to the left of the Sim Version label:
+  - MSFS Performance Optimiser - enabled via the "+" checkbox to the left of the Sim Version label:
     - The Sim Values panel reflects optimiser‑controlled states such as CPU affinity, process priority, and power‑plan selection, updating immediately when these values are applied or restored.
-    - Designed to change states only when they have not already been modified by other tools (e.g., VR Auto Optimiser, Process Lasso), ensuring no conflict with external managers.
-    - The **Sim Version text changes to royal blue** to indicate the optimiser is active and controlling MSFS.
-    - Provides four user‑configurable options in the common config file in the app's root directory:
-      - AffinityPhysicalCoreThreshold – sets the logical‑CPU cutoff for physical‑core affinity; default is 6, and set to 32 to effectively disable.
-      - AMDUseFirstCCDOnly – enables first‑CCD‑only affinity on dual‑CCD AMD CPUs; default is enabled.
-      - MSFSProcessPriority – selects the MSFS process priority; Normal, AboveNormal and High are the only allowable choices; default is High.
-      - PowerPlanEnabled – toggles automatic power‑plan switching; default is enabled.
-    - The optimiser tooltip dynamically rebuilds on load to show the active configuration, including the selected power plan, physical‑core affinity threshold, and MSFS process priority.
+    - Designed to change states only when they are at their default levels and have not already been modified by other tools (e.g., VR Auto Optimiser, Process Lasso), ensuring no conflict with external managers.
+    - The Sim Version text changes to royal blue to indicate the optimiser is active and controlling MSFS.
+    - Provides UI controls for Physical Cores, MSFS process priority, and Best Windows Power Plan when hovering over the optimiser checkbox or MSFS label.
+    - Can be fine‑tuned with four user‑configurable options in the common config file in the app’s root directory.
+    - CPU Affinity:
+      - Uses a universal physical‑core rule based on SMT that gives consistent behaviour across AMD, Intel hybrid, and SMT‑off systems.
+      - On Intel hybrid CPUs, MSFS runs on the P‑cores only, since E‑cores don’t support SMT and aren’t counted as physical cores in this rule.
+      - The `AffinityPhysicalCoreThreshold` key, defaulting to 6, controls the SMT‑core threshold at which physical‑core‑only affinity is applied; setting this value to 32 effectively disables the feature on most CPUs.
+      - The `AMDUseFirstCCDOnly` key, defaulting to true, activates first‑CCD affinity mode on dual‑CCD AMD CPUs. The tooltip appends "CCD+" to the physical‑core affinity line when this mode is active.
+      - When enabled, sets CPU affinity to physical cores only, excluding SMT threads, and provides warnings or CCD‑specific options where applicable.
+    - MSFS Process Priority:
+      - Changes priority only when MSFS is running at the default Normal level, switching it to High when available and leaving any user‑set AboveNormal or RealTime priority untouched.
+      - The `MSFSProcessPriority` key, defaulting to High, controls the target MSFS process priority (Normal / AboveNormal / High). RealTime is intentionally excluded because using it would require AutoFPS itself to run elevated.
+      - Priority level is selectable via a dropdown UI control.
+    - Windows Power Plan:
+      - Overrides the power plan only when starting from the default Balanced plan, choosing Ultimate Performance or High Performance depending on availability.
+      - The `PowerPlanEnabled` key, defaulting to true, explicitly enables or disables automatic power‑plan switching.
+      - Power‑plan selection is available as a UI toggle.
+    - Applies delayed second writes for both CPU affinity and process priority to ensure settings reliably stick on systems that ignore the initial set.
+    - The optimiser tooltip dynamically rebuilds on load to show the active configuration, including the selected power plan, physical‑core affinity threshold, MSFS process priority, and the current UI‑controlled states.
 - Sim Values
   - Will not show valid values unless all three connections are green.
   - Red values mean FPS Adaption is active, orange means LOD stepping is active, black means steady state, n/a means not available right now.
   - When MSFS is detected and **NOT** in a flight session:
     - Default **TLOD**, **OLOD**, and **Cloud Quality** values are displayed and refresh within one second of changes made in the MSFS settings menu.
     - **VR‑specific defaults** show automatically when in VR mode.
+  - FPS+ - shows the average FPS, filtered for spikes and dips, for the current graphics mode.
+    - Smooths out any transient FPS spikes or dips experienced - such as those caused by sudden changes in view, panning, scenery loading or other transient events - so that undesired automated MSFS setting changes are minimised.
+    - FPS values within 15% (FPS Sensitivity and Tolerance automation modes) or 10% (AutoTLOD and FPS Cap automation modes) of the current average are averaged over a 5 second rolling window of FPS values
+    - FPS values outside of this range are considered outliers and are not included in the average until a sustained change over 3 seconds in the same direction is detected.
+    - The average will recover more quickly if the very recent trend is detected to have minimal variance.
+    - Averaging period is 5 seconds.
+  - FPS source icon - RTSS (RivaTuner Statistics Server) or MSFS.
+    - **[RTSS](https://www.guru3d.com/download/rtss-rivatuner-statistics-server-download/)** is a well-established tool for FPS monitoring, widely used in the gaming community and fully compatible with MSFS.
+    - RTSS is the default FPS source and will automatically revert to MSFS as the FPS source if RTSS is not installed and running.
+    - Clicking the FPS source icon will switch the FPS source to the alternate source and the icon will change accordingly, with the added requirement that RTSS must be running in order to switch to RTSS as a source.
+    - The last used FPS source will be saved and restored upon the next app launch, when a flight session begins, or when the Reset button is pressed during a flight session.
 - General
   - User Profiles:
     - You have six different Sets/Profiles for the AGL/LOD Pairs to switch between (manually but dynamically).
