@@ -1,4 +1,4 @@
-# DynamicLOD_ResetEdition v0.5.7
+# DynamicLOD_ResetEdition v0.5.8
 
 Based on muumimorko's idea and code in MSFS_AdaptiveLOD, as further developed by Fragtality in DynamicLOD and myself in MSFS2020_AutoFPS and MSFS_AutoFPS.<br/>
 
@@ -152,10 +152,10 @@ Some Notes:
       - Installer runs automatically, showing Release Notes in Notepad and auto-starting the new version.
     - **Show Updates** displays available updates and download links.
     - **Mandatory Updates Only** displays and installs only mandatory updates.
-    - **+ Test** opts users into test version updates.
-      - Test version users will have **+ Test** force enabled and greyed out.
-      - **Mandatory Updates Only** will be unavailable until the app updates to a release version.
-       - Updates for test versions run a shorter process than release versions, as they assume all core components are already up to date.
+    - **Update Channel** sets the minimum maturity level for updates (Release, RC+, Test+, Exp+), replacing the previous binary test‑update model.
+      - Test‑channel users who return to **Release** will be offered a one-time automatic rollback to the latest formal release.
+      - **Mandatory Updates Only** remains unavailable while on any test channel.
+      - Test‑channel updates run a shorter process than release updates, assuming all core components are already current.
     - **Compatibility Updates** may be auto-installed if the app fails its compatibility check and a matching update is available, which may potentially be a test build if no stable version exists.
    - App startup sequence ensures update check is completed before connecting to MSFS.
   - Starting manually: anytime, but preferably before MSFS or in the Main Menu. The utility will stop itself when MSFS closes.  
@@ -173,6 +173,7 @@ Some Notes:
   - Automatically identifies which MSFS version is in use as either MSFS2020 or MSFS2024 and the version number. 
   - If the sim version is showing in red and is not the MSFS version you wish to configure before starting that MSFS version, click the 20>24 or 24>20 button, as applicable, and it will change to that.
   - MSFS Performance Optimiser - enabled via the "+" checkbox to the left of the Sim Version label:
+    - When first enabled, a one‑off warning dialog advises users of potential performance, stuttering, audio, or unexpected MSFS behaviour when using this feature.
     - The Sim Values panel reflects optimiser‑controlled states such as CPU affinity, process priority, and power‑plan selection, updating immediately when these values are applied or restored.
     - Designed to change states only when they are at their default levels and have not already been modified by other tools (e.g., VR Auto Optimiser, Process Lasso), ensuring no conflict with external managers.
     - The Sim Version text changes to royal blue to indicate the optimiser is active and controlling MSFS.
