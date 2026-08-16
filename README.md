@@ -163,7 +163,7 @@ Some Notes:
   - Clicking on the SysTray Icon opens the Window (again).
   - Running as Admin NOT usually required (BUT: It is required to be run under the same User/Elevation as MSFS). 'Admin' will be shown on the app title bar when the app is running as Admin.
   - Do not change TLOD, OLOD and Cloud Quality MSFS settings manually while in a flight with this app running as it will conflict with what the app is managing and they will not restore to what you set when you exit your flight. If you wish to change the defaults for these MSFS settings, you must do so either without this app running or, if it is, only while you are in the MSFS main menu (ie not in a flight).
-  - If you wish to have the app exit at the conclusion of a flight session, change ExitAppAfterFlightSession in the common config file to true.
+  - If you wish to have the app exit at the conclusion of a flight session, change 'ExitAppAfterFlightSession' in the common config file to true.
 - App Window
   - Position and minimised/maximised state will be remembered between sessions, except movements to it made while in VR due to window restoration issues.
   - Will automatically reset to default position (50,50) if the app is restarted within 15 seconds of last closing, except if disabled by settting the AllowWindowPosReset key to false in the common config file.
