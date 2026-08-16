@@ -1,4 +1,4 @@
-# DynamicLOD_ResetEdition v0.5.8
+# DynamicLOD_ResetEdition v0.5.9
 
 Based on muumimorko's idea and code in MSFS_AdaptiveLOD, as further developed by Fragtality in DynamicLOD and myself in MSFS2020_AutoFPS and MSFS_AutoFPS.<br/>
 
@@ -101,7 +101,7 @@ Some Notes:
   - If the MobiFlight Module is not installed or outdated, MSFS also has to be stopped.
   - If you have duplicate MobiFlight Modules installed, in either your official or community folders, the app may display 0 value Sim Values and otherwise not function. Remove the duplicate versions, rerun the app installer and it should now work.
   - If the installer fails when checking/updating Mobiflight, despite the latest version being correctly installed in your MSFS Community folder, create a shortcut for the installer, add the command line option "-bypassmobiflight" to the target text box, then run the shortcut to be able to bypass this installation step.
-- Do not run the Installer as Admin!
+- Do not run the Installer as Admin unless it will not install due to a permissions issue. If the installer is run as Admin, a warning message will be shown.
 - If you wish to retain your settings for an update version, do NOT uninstall first, as that deletes all app files, including the config file. Just run the installer, select update and your settings will be retained.
 - The utility may be blocked by Windows Security or your AV-Scanner, try if unblocking and/or setting an Exception helps (for the whole Folder)
 - The Installation-Location is fixed to %appdata%\DynamicLOD_ResetEdition (your Users AppData\Roaming Folder) and can't be changed.
@@ -161,8 +161,9 @@ Some Notes:
   - Starting manually: anytime, but preferably before MSFS or in the Main Menu. The utility will stop itself when MSFS closes.  
   - Closing the Window does not close the utility, use the Context Menu of the SysTray Icon.
   - Clicking on the SysTray Icon opens the Window (again).
-  - Running as Admin NOT required (BUT: It is required to be run under the same User/Elevation as MSFS).
+  - Running as Admin NOT usually required (BUT: It is required to be run under the same User/Elevation as MSFS). 'Admin' will be shown on the app title bar when the app is running as Admin.
   - Do not change TLOD, OLOD and Cloud Quality MSFS settings manually while in a flight with this app running as it will conflict with what the app is managing and they will not restore to what you set when you exit your flight. If you wish to change the defaults for these MSFS settings, you must do so either without this app running or, if it is, only while you are in the MSFS main menu (ie not in a flight).
+  - If you wish to have the app exit at the conclusion of a flight session, change 'ExitAppAfterFlightSession' in the common config file to true.
 - App Window
   - Position and minimised/maximised state will be remembered between sessions, except movements to it made while in VR due to window restoration issues.
   - Will automatically reset to default position (50,50) if the app is restarted within 15 seconds of last closing, except if disabled by settting the AllowWindowPosReset key to false in the common config file.
@@ -209,7 +210,7 @@ Some Notes:
     - Averaging period is 5 seconds.
   - FPS source icon - RTSS (RivaTuner Statistics Server) or MSFS.
     - **[RTSS](https://www.guru3d.com/download/rtss-rivatuner-statistics-server-download/)** is a well-established tool for FPS monitoring, widely used in the gaming community and fully compatible with MSFS.
-    - RTSS is the default FPS source and will automatically revert to MSFS as the FPS source if RTSS is not installed and running.
+    - RTSS is the default FPS source and will automatically revert to MSFS as the FPS source if RTSS is not installed and running or if Dynamic FG is the graphics mode.
     - Clicking the FPS source icon will switch the FPS source to the alternate source and the icon will change accordingly, with the added requirement that RTSS must be running in order to switch to RTSS as a source.
     - The last used FPS source will be saved and restored upon the next app launch, when a flight session begins, or when the Reset button is pressed during a flight session.
 - General
@@ -228,7 +229,7 @@ Some Notes:
     - Flight is loaded
       - Shows current sim rate with a range of 0.125X to 16X, which will display at the start of the app status line for any value except 1X, detected DX version (MSFS 2020 only), Graphics Mode (PC, FG, LSFG, MFG, FSR3 or VR), and app pause or FPS settling time status as applicable.
       - The FPS settling timer runs for 6 seconds to allow FPS to settle between pausing/unpausing and PC/FG/LSFG/VR mode transitions. This allows the FPS to stabilise before engaging automatic functions and should lead to much smaller TLOD changes when seeking the target FPS on such transitions.
-    - Graphics Mode - Set to GFX Mode Auto for the app to auto-detect most common graphics modes used with MSFS. If an unsupported FG type is in use, manually configured by selecting Man FG and the applicable multiplier in use.
+    - Graphics Mode - Set to GFX Mode Auto for the app to auto-detect most common graphics modes used with MSFS. If an unsupported FG type is in use, manually configured by selecting Man FG and the applicable multiplier in use or DynFG with a 1X multiplier when using dynamic/adaptive FG.
 - LOD Level Tables
   - The first Pair with AGL 0 can not be deleted. The AGL can not be changed. Only the xLOD.
   - Additional Pairs can be added at any AGL and xLOD desired. Pairs will always be sorted by AGL.
